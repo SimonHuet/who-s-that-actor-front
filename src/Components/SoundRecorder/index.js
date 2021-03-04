@@ -1,2 +1,2 @@
-import { SoundRecorder } from './soundRecorder'
+import { SoundRecorder } from './SoundRecorder'
 export default SoundRecorder

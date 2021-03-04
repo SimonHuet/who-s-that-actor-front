@@ -3,6 +3,7 @@ import { Menu } from 'antd'
 import { getChildrenToRender } from '../utils'
 import './Nav.css'
 import WhiteLogo from '../assets/WhiteLogo.png'
+import { Link } from 'react-router-dom'
 
 const menuItems = [
   {
@@ -51,9 +52,9 @@ export const Nav = () => {
           {subItem.map(($item, ii) => {
             const { children: childItem } = $item
             const child = childItem.href ? (
-              <a {...childItem}>
+              <Link to={childItem.href}>
                 {childItem.children.map(getChildrenToRender)}
-              </a>
+              </Link>
             ) : (
               <div {...childItem}>
                 {childItem.children.map(getChildrenToRender)}

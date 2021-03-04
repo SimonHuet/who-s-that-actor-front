@@ -13,8 +13,13 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     'jest/valid-title': 'off',
-    'prettier/prettier': 'error',
     'no-trailing-spaces': 'error',
     'spaced-comment': ['error', 'always'],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 }
