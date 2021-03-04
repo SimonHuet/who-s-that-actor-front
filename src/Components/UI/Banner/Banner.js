@@ -20,22 +20,28 @@ export const Banner = ({ id }) => {
         <div key="content" className="banner-content">
           Who's that actor ?
         </div>
-        <Button ghost key="button" className="banner-button">
+        <Button
+          href="/sound-recorder"
+          ghost
+          key="button"
+          className="banner-button"
+        >
           Try it
         </Button>
+
+        <TweenOne
+          animation={{
+            y: '-=15',
+            yoyo: true,
+            repeat: -1,
+            duration: 1000,
+          }}
+          className="banner-icon"
+          key="icon"
+        >
+          <DownOutlined />
+        </TweenOne>
       </QueueAnim>
-      <TweenOne
-        animation={{
-          y: '-=20',
-          yoyo: true,
-          repeat: -1,
-          duration: 1000,
-        }}
-        className="banner-icon"
-        key="icon"
-      >
-        <DownOutlined />
-      </TweenOne>
     </div>
   )
 }

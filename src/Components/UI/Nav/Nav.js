@@ -22,7 +22,7 @@ const menuItems = [
     },
   },
   {
-    name: 'item',
+    name: 'item2',
     className: 'header-item',
     children: {
       href: '/login',
