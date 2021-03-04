@@ -7,12 +7,19 @@ import * as AuthState from '../State/Auth'
 
 export function* login({ payload: { email, password } }) {
   try {
-    const user = fetchApi(UserApi.login(email, password))
-    yield put(AuthState.UserFetched(user))
-    yield JwtLocalStorage.add(user.token)
+    const user = yield callApi(UserApi.login({ email, password }))
+    yield put(AuthState.userFetched(user))
   } catch (error) {
     yield put(AuthState.failure(error))
   }
+}
+
+export function* callApi({ ...fetchParam }) {
+  return yield call(fetchApi, fetchParam)
+}
+
+export function* setToken({ payload: { token } }) {
+  yield call(JwtLocalStorage.add, token)
 }
 
 export function* disconnect() {
@@ -23,4 +30,5 @@ export function* disconnect() {
 export default function* rootSaga() {
   yield takeEvery(AuthState.login, login)
   yield takeEvery(AuthState.disconnect, disconnect)
+  yield takeEvery(AuthState.userFetched, setToken)
 }

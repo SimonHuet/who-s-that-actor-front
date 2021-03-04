@@ -1,13 +1,13 @@
 export const login = ({ email, password }) => ({
-  path: '/api/user/login',
+  path: '/users/login',
   options: {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: {
+    body: JSON.stringify({
       email,
       password,
-    },
+    }),
   },
 })

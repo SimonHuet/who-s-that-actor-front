@@ -4,6 +4,10 @@ const INITIAL_STATE = {
   user: null,
   error: null,
   isLoading: false,
+  formData: {
+    email: '',
+    password: '',
+  },
 }
 
 const slice = createSlice({
@@ -13,6 +17,8 @@ const slice = createSlice({
     login: state => ({
       ...state,
       isLoading: true,
+      formData: { ...state.formData },
+      errors: [],
     }),
     failure: (state, { payload: error }) => ({
       ...state,
@@ -29,11 +35,30 @@ const slice = createSlice({
       error: null,
       isLoading: false,
     }),
+    disconnected: state => ({
+      ...state,
+      isLoading: false,
+    }),
+    changeFormData: (state, { field, data }) => ({
+      ...state,
+      formData: {
+        ...state.formData,
+        [field]: data,
+      },
+    }),
   },
 })
 
 export const { reducer } = slice
-export const { login, failure, disconnect, userFetched } = slice.actions
+export const {
+  login,
+  failure,
+  disconnect,
+  userFetched,
+  disconnected,
+  changeFormData,
+} = slice.actions
+
 export const select = {
   isLoading: state => state.auth.isLoading,
   error: state => state.auth.error,
