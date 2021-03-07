@@ -2,6 +2,7 @@ import './Login.css'
 import { Form, Input, Button } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import * as AuthState from '../../State/Auth'
+import { Redirect } from 'react-router-dom'
 
 const layout = {
   labelCol: { span: 8 },
@@ -14,13 +15,16 @@ const tailLayout = {
 export const Login = () => {
   const dispatch = useDispatch()
   const error = useSelector(AuthState.select.error)
+  const user = useSelector(AuthState.select.user)
 
   const handleSubmit = ({ email, password }) => {
     dispatch(AuthState.login({ email, password }))
   }
 
+  if (!error && user) return <Redirect to={{ pathname: '/' }} />
+
   return (
-    <div className="wrapper">
+    <div className="wrapper-login">
       <div className="Login" style={{ width: 400, margin: '100px auto' }}>
         <Form
           {...layout}

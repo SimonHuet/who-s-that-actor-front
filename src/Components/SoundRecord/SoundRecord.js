@@ -51,7 +51,7 @@ export const SoundRecorder = () => {
   }
 
   return (
-    <div>
+    <div className="wrapper-record">
       <Recorder
         record={true}
         title={"Record the actor's voice"}
