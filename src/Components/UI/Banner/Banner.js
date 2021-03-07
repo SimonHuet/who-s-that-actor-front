@@ -21,7 +21,7 @@ export const Banner = ({ id }) => {
           Who's that actor ?
         </div>
         <Button
-          href="/sound-recorder"
+          href="/sound-record"
           ghost
           key="button"
           className="banner-button"

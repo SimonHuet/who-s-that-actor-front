@@ -31,7 +31,6 @@ export function* setToken({
 
 export function* disconnect() {
   yield call(JwtLocalStorage.remove)
-  yield put(AuthState.disconnected())
 }
 
 export default function* rootSaga() {

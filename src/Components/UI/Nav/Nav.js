@@ -4,71 +4,61 @@ import { getChildrenToRender } from '../utils'
 import './Nav.css'
 import WhiteLogo from '../assets/WhiteLogo.png'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-const menuItems = [
-  {
-    name: 'item',
-    className: 'header-item',
-    children: {
-      href: '/',
-      children: [{ children: 'Home', name: 'text' }],
-    },
-  },
-  {
-    name: 'item1',
-    className: 'header-item',
-    children: {
-      href: '/sound-record',
-      children: [{ children: 'Sound record', name: 'text' }],
-    },
-  },
-  {
-    name: 'item2',
-    className: 'header-item',
-    children: {
-      href: '/login',
-      children: [{ children: 'Login', name: 'text' }],
-    },
-  },
-]
+import * as AuthState from '../../../State/Auth'
 
 const { Item, SubMenu } = Menu
 
 export const Nav = () => {
+  const dispatch = useDispatch()
+
+  const menuItems = [
+    {
+      name: 'item',
+      className: 'header-item',
+      needLogin: false,
+      children: {
+        href: '/',
+        children: [{ children: 'Home', name: 'text' }],
+      },
+    },
+    {
+      name: 'item1',
+      className: 'header-item',
+      needLogin: true,
+      children: {
+        href: '/sound-record',
+        children: [{ children: 'Sound record', name: 'text' }],
+      },
+    },
+    localStorage.getItem('userToken')
+      ? {
+          name: 'item2',
+          className: 'header-item',
+          needLogin: true,
+          children: {
+            href: '/disconnect',
+            children: [{ children: 'Disconnect', name: 'text' }],
+            onClick: () => dispatch(AuthState.disconnect()),
+          },
+        }
+      : {
+          name: 'item2',
+          className: 'header-item',
+          needLogin: false,
+          children: {
+            href: '/login',
+            children: [{ children: 'Login', name: 'text' }],
+          },
+        },
+  ]
+
   const navChildren = menuItems.map(item => {
-    const { children: a, subItem, ...itemProps } = item
-    if (subItem) {
-      return (
-        <SubMenu
-          key={item.name}
-          {...itemProps}
-          title={
-            <div {...a} className={`header-item-block ${a.className}`.trim()}>
-              {a.children.map(getChildrenToRender)}
-            </div>
-          }
-          popupClassName="header-item-child"
-        >
-          {subItem.map(($item, ii) => {
-            const { children: childItem } = $item
-            const child = childItem.href ? (
-              <Link to={childItem.href}>
-                {childItem.children.map(getChildrenToRender)}
-              </Link>
-            ) : (
-              <div {...childItem}>
-                {childItem.children.map(getChildrenToRender)}
-              </div>
-            )
-            return (
-              <Item key={$item.name || ii.toString()} {...$item}>
-                {child}
-              </Item>
-            )
-          })}
-        </SubMenu>
-      )
-    }
+    const { children: a } = item
+
+    if (item.needLogin && !localStorage.getItem('userToken')) return false
+
     return (
       <Item key={item.name} className="header home-page-wrapper">
         <a {...a} className={`header-item-block`}>
