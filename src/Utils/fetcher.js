@@ -1,5 +1,15 @@
-export const fetchApi = ({ path, options = {} }) =>
-  fetch(`${process.env.REACT_APP_API}${path}`, {
+export const fetchApi = ({ path, options = {} }) => {
+  console.log({
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+      ...(localStorage.getItem('userToken') && {
+        Authorization: localStorage.getItem('userToken'),
+      }),
+    },
+  })
+  return fetch(`${process.env.REACT_APP_API}${path}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -17,3 +27,4 @@ export const fetchApi = ({ path, options = {} }) =>
 
       return body
     })
+}

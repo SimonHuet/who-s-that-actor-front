@@ -20,7 +20,7 @@ const slice = createSlice({
       formData: { ...state.formData },
       errors: [],
     }),
-    failure: (state, { payload: error }) => ({
+    failure: (state, { payload: { error } }) => ({
       ...state,
       error,
       isLoading: false,

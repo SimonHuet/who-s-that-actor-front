@@ -19,10 +19,7 @@ const slice = createSlice({
   name: 'record',
   initialState: INITIAL_STATE,
   reducers: {
-    uploadAudio: state => ({
-      ...state,
-      error: null,
-    }),
+    uploadAudio: state => ({ ...state, error: null }),
     changeAudio: (state, { payload: audioDetails }) => ({
       ...state,
       error: null,

@@ -57,7 +57,7 @@ export const Login = () => {
               Submit
             </Button>
           </Form.Item>
-          {error && <span className="error">{error}</span>}
+          {error && <span className="error">{error.message}</span>}
         </Form>
       </div>
     </div>

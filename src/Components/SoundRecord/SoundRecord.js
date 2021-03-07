@@ -1,7 +1,8 @@
-import Form from 'antd/lib/form/Form'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Recorder } from 'react-voice-recorder'
 import 'react-voice-recorder/dist/index.css'
+import * as RecordState from '../../State/Record'
 
 export const SoundRecorder = () => {
   const [audioDetails, setAudioDetails] = useState({
@@ -15,13 +16,14 @@ export const SoundRecorder = () => {
     },
   })
 
+  const dispatch = useDispatch()
+
   const handleAudioStop = data => {
-    console.log(data)
     setAudioDetails(data)
   }
 
   const handleAudioUpload = file => {
-    console.log(file)
+    dispatch(RecordState.uploadAudio({ file }))
   }
 
   const handleRest = () => {
@@ -44,8 +46,8 @@ export const SoundRecorder = () => {
       title={"Record the actor's voice"}
       audioURL={audioDetails.url}
       showUIAudio
-      handleAudioStop={data => handleAudioStop(data)}
-      handleAudioUpload={data => handleAudioUpload(data)}
+      handleAudioStop={handleAudioStop}
+      handleAudioUpload={handleAudioUpload}
       handleRest={() => handleRest()}
     />
   )
