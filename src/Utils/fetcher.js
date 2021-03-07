@@ -12,7 +12,6 @@ export const fetchApi = ({ path, options = {} }) => {
   return fetch(`${process.env.REACT_APP_API}${path}`, {
     ...options,
     headers: {
-      'Content-Type': 'application/json',
       ...options.headers,
       ...(localStorage.getItem('userToken') && {
         Authorization: localStorage.getItem('userToken'),

@@ -1,7 +1,7 @@
 export const upload = ({ file, userId }) => {
   const formData = new FormData()
 
-  formData.append('file', [file])
+  formData.append('file', file)
   formData.append('user_id', userId)
 
   return {
@@ -9,7 +9,7 @@ export const upload = ({ file, userId }) => {
     options: {
       method: 'POST',
       headers: {
-        'Content-Type': 'multipart/form-data',
+        Accept: '*/*',
       },
       body: formData,
     },
