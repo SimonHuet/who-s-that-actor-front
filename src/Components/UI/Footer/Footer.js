@@ -101,12 +101,11 @@ export const Footer = ({ id }) => {
           leaveReverse
           component={Row}
           className="home-page"
-          gutter={0}
         >
           {childrenToRender}
         </QueueAnim>
         <TweenOne
-          animation={{ y: '+=30', opacity: 0, type: 'from' }}
+          animation={{ y: '+=30', opacity: 1, type: 'from' }}
           key="copyright"
           className="copyright-wrapper"
         >
