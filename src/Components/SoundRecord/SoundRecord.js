@@ -5,6 +5,7 @@ import { Avatar, Descriptions } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import 'react-voice-recorder/dist/index.css'
 import * as RecordState from '../../State/Record'
+import './SoundRecorder.css'
 
 export const SoundRecorder = () => {
   const [audioDetails, setAudioDetails] = useState({
@@ -18,17 +19,10 @@ export const SoundRecorder = () => {
     },
   })
 
-  const [isRequested, setIsRequested] = useState(false)
+  const [isRequested, setIsRequested] = useState(true)
 
-  // const prediction = useSelector(RecordState.select.prediction)
+  const prediction = useSelector(RecordState.select.prediction)
   const error = useSelector(RecordState.select.error)
-  const prediction = {
-    code_ia: 8976,
-    first_name: 'Eddy',
-    id: '4e285991-63e9-4c56-b8b2-4e0fa0f1174a',
-    last_name: 'Cheval',
-    url_imdb: 'https://www.imdb.com/name/nm4236091/?ref_=nv_sr_srsg_0',
-  }
 
   const dispatch = useDispatch()
 
@@ -68,30 +62,36 @@ export const SoundRecorder = () => {
         handleRest={() => handleReset()}
       />
 
-      {prediction && (
+      {isRequested && prediction && (
         <div className="pred-wrapper">
           {console.log(prediction)}
-          <Avatar size={64} icon={<UserOutlined />} />
-          <Descriptions title="Actor Infos">
-            <Descriptions.Item label="First Name">
-              {prediction.first_name}
-            </Descriptions.Item>
-            <Descriptions.Item label="Last Name">
-              {prediction.last_name}
-            </Descriptions.Item>
-            <Descriptions.Item label="IMDB profile">
-              {prediction.url_imdb ? (
-                <a target="_blank" rel="noreferrer" href={prediction.url_imdb}>
-                  Go to profile
-                </a>
-              ) : (
-                <p>There is no imdb profile for that actor</p>
-              )}
-            </Descriptions.Item>
-          </Descriptions>
-          ,
+          <div>
+            <Avatar size={64} icon={<UserOutlined />} />
+            <Descriptions title="Actor Infos">
+              <Descriptions.Item label="First Name">
+                {prediction.first_name}
+              </Descriptions.Item>
+              <Descriptions.Item label="Last Name">
+                {prediction.last_name}
+              </Descriptions.Item>
+              <Descriptions.Item label="IMDB profile">
+                {prediction.url_imdb ? (
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href={prediction.url_imdb}
+                  >
+                    Go to profile
+                  </a>
+                ) : (
+                  <p>There is no imdb profile for that actor</p>
+                )}
+              </Descriptions.Item>
+            </Descriptions>
+          </div>
         </div>
       )}
+      {isRequested && error && <div className="error">{error.message}</div>}
     </div>
   )
 }
