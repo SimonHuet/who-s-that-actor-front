@@ -10,6 +10,7 @@ import SoundRecord from './Components/SoundRecord'
 import Login from './Components/Login'
 import { Footer, Nav } from './Components/UI'
 import RedirectToHome from './Utils/RedirectToHome'
+import HistoryPage from './Components/HistoryPage'
 
 const App = () => (
   <Router>
@@ -18,6 +19,7 @@ const App = () => (
       <Route path="/login" component={Login} />
       <PrivateRoute path="/sound-record" component={SoundRecord} />
       <Route path="/" component={HomePage} />
+      <Route path="/History" componont={HistoryPage} />
       <Route path="/disconnect" component={RedirectToHome} />
     </Switch>
     <Footer id="Footer" key="Footer" />

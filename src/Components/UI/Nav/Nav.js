@@ -32,6 +32,15 @@ export const Nav = () => {
         children: [{ children: 'Sound record', name: 'text' }],
       },
     },
+    {
+      name: 'item3',
+      className: 'header-item',
+      needLogin: false,
+      children: {
+        href: '/history-page',
+        children: [{ children: 'History page', name: 'text' }],
+      },
+    },
     localStorage.getItem('userToken')
       ? {
           name: 'item2',
