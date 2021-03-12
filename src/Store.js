@@ -15,8 +15,5 @@ export const createStore = () => {
 
   return store
 }
-configureStore({
-  reducer: rootReducer,
-})
 
 export default createStore()
