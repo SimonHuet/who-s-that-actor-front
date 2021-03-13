@@ -25,6 +25,12 @@ npm run start
 ```sh
 npm run test
 ```
+## Others projects repos
+
+* [BackOffice](https://github.com/AlbanGuillet/OpenInnovBackOffice)
+* [Homepage](https://g72ze0duasao.umso.co/)
+* [API](https://github.com/EddyCheval/AsaeyOinnovApi)
+* [BACKEND](https://github.com/Nefaden/OpenInnovI2Backend)
 
 ## Author
 
